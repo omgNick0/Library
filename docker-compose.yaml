@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  postgresql:
+    image: bitnami/postgresql:14.17.0
+    ports:
+      - "5433:5432"
+    volumes:
+      - ~/docker/postgres:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_DATABASE=library

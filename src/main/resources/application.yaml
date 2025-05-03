@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: bookshell
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/library
+    username: admin
+    password: admin
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
