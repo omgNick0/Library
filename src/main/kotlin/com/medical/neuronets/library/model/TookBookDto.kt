@@ -5,7 +5,6 @@ import java.util.UUID
 
 
 /**
- * @param id just an id
  * @param userID userID
  * @param bookID bookID
  * @param isReturned were your book returned or not
@@ -14,5 +13,5 @@ import java.util.UUID
  */
 
 // deleted user ID:  val userID: UUID
-data class TookBookDto(val id: UUID, val bookID: UUID, val userID: UUID,
+data class TookBookDto( val bookID: UUID, val userID: UUID,
                        var isReturned: Boolean, var tookDate: Timestamp, var returnDate: Timestamp)

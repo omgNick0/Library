@@ -2,7 +2,7 @@ package com.medical.neuronets.library.service
 
 import com.medical.neuronets.library.dao.BookRepository
 import com.medical.neuronets.library.dao.TookBookRepository
-//import com.medical.neuronets.library.dao.UserRepository
+import com.medical.neuronets.library.dao.UserRepository
 import com.medical.neuronets.library.entity.TookBookEntity
 import com.medical.neuronets.library.model.TookBookDto
 import com.medical.neuronets.library.response.TookBookResponse
@@ -15,16 +15,19 @@ import java.util.UUID
 // val userRepository: UserRepository
 
 @Service
-class TookBookImpl(val tookBookRepository: TookBookRepository,
-                   val bookRepository: BookRepository): TookBookService {
+class TookBookServiceImpl(
+    val tookBookRepository: TookBookRepository,
+    val bookRepository: BookRepository,
+    val userRepository: UserRepository
+) : TookBookService {
     override fun create(tookBookDto: TookBookDto): TookBookResponse {
-        val tookBookEntity = TookBookEntity()
-        tookBookEntity.book = bookRepository.findByIdOrNull(tookBookDto.bookID)
-     //   tookBookEntity.user = userRepository.findByIdOrNull(tookBookDto.userID)
-        tookBookEntity.tookDate = tookBookDto.tookDate
-        tookBookEntity.returnDate = tookBookDto.returnDate
-     //   bookRepository.deleteById()
-
+        val tookBookEntity = TookBookEntity().apply {
+            this.book = bookRepository.findByIdOrNull(tookBookDto.bookID)
+            this.user = userRepository.findByIdOrNull(tookBookDto.userID)
+            this.tookDate = tookBookDto.tookDate
+            this.returnDate = tookBookDto.returnDate
+        }
+//        bookRepository.deleteById()
         tookBookRepository.save(tookBookEntity)
         return TookBookResponse(tookBookEntity)
     }
@@ -40,7 +43,7 @@ class TookBookImpl(val tookBookRepository: TookBookRepository,
         val tookBookEntity =
             tookBookRepository.findById(id).orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
         tookBookEntity.book = bookRepository.findByIdOrNull(tookBookDto.bookID)
- //       tookBookEntity.user = userRepository.findByIdOrNull(tookBookDto.bookID)
+        //       tookBookEntity.user = userRepository.findByIdOrNull(tookBookDto.bookID)
         tookBookEntity.tookDate = tookBookDto.tookDate
         tookBookEntity.returnDate = tookBookDto.returnDate
         tookBookRepository.save(tookBookEntity)

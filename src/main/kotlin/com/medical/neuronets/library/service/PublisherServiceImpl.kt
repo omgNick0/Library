@@ -13,6 +13,7 @@ import java.util.*
 
 
 // добавили маппер
+// разобраться с маппером
 
 @Service
 class PublisherServiceImpl(
