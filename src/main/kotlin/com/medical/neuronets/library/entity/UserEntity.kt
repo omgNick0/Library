@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType
 import java.util.UUID
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_entity")
 class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
